@@ -69,7 +69,10 @@ class UPS:
                     title.text.lower().__contains__('senior') or
                     title.text.lower().__contains__('specialist') or
                     title.text.lower().__contains__('intern') or
-                    title.text.lower().__contains__('manager')):
+                    title.text.lower().__contains__('manager') or
+                    title.text.lower().__contains__('sr') or
+                    title.text.lower().__contains__('intermediate') or
+                    title.text.lower().__contains__('chennai')):
                 continue
             else:
                 title_list.append(title.text)  # I need to add this to a database
