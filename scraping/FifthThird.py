@@ -18,7 +18,7 @@ slack_token = os.getenv('TOKEN')
 slack_channel_id = os.getenv('CHANNEL_ID')
 client = WebClient(token=slack_token)
 
-
+#this is a global configuration for the 53 class 
 def configure_53_chromedriver():
     options = Options()
     options.add_argument('--headless')
