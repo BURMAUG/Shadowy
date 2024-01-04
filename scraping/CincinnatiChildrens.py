@@ -13,7 +13,7 @@ xpath = '//button[@class="au-target btn primary-button btn-lg phs-search-submit"
 class CincinnatiChildrens:
     def __init__(self, url):
         self.driver = chrome_config(url)
-
+    
     def filter_by_developers(self):
         try:
             search_box = WebDriverWait(self.driver, 10).until(

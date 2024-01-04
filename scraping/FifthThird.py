@@ -10,8 +10,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from slack_sdk import WebClient
 
-# import repository.db
-
 import db
 
 load_dotenv()
