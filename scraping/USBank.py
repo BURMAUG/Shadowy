@@ -13,6 +13,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from slack_sdk import WebClient
 
 import db
+from Config.Configure import strip_links_href
 
 load_dotenv()
 
@@ -34,15 +35,18 @@ def configure_usbank_chromedriver():
     return driver
 
 
+# def strip_links_href(look_href):
+#     for href in look_href:
+#         print(href.get_attribute('href'))
+
+
 class USBank:
     def __init__(self):
         self.driver = configure_usbank_chromedriver()
 
     def filter_by_dev_location(self):
         try:
-            # find_element(By.XPATH, '//input[@class="css-c8umoa"]'))
             search_input = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@class="css-c8umoa"]')))
-
             search_input.send_keys('software engineer')
             time.sleep(5)
             search_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//button[@class="css-1ngttsd"]')))
@@ -56,12 +60,15 @@ class USBank:
             time.sleep(5)
             view_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//button[@data-automation-id="viewAllJobsButton"]')))
             view_btn.click()
+            look_href = WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME, "css-19uc56f")))
+            strip_links_href(look_href)
             time.sleep(10)
         except (ElementClickInterceptedException,
                 NoSuchElementException,
                 WebDriverException,
                 ElementClickInterceptedException):
             print("US BANK filter error")
+
 
     def convert_title_to_db_objects(self, titles):
         title_list = []

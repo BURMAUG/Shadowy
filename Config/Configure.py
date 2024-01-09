@@ -17,10 +17,15 @@ client = WebClient(token=slack_token)
 def chrome_config(url):
     options = Options()
     options.add_argument('--headless')
-    service = Service()
+    service = Service('/usr/local/bin/chromedriver')
     driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
     return driver
+
+
+def strip_links_href(look_href):
+    for href in look_href:
+        print(href.get_attribute('href'))
 
 
 def convert_title_to_db_objects(titles):
@@ -108,4 +113,3 @@ def make_cch_object(job_titles):
                 # Handle the exception (e.g., print an error message)
                 print(f"Error processing title: {title}. Error: {e}")
     db.connection.commit()
-

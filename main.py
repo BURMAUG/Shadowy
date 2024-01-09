@@ -3,8 +3,11 @@ from multiprocessing import Process
 
 from dotenv import load_dotenv
 from selenium.common import ElementClickInterceptedException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 import Config
+from Config.Configure import strip_links_href
 from scraping.CincinnatiChildrens import CincinnatiChildrens
 from scraping.FifthThird import FifthThird
 from scraping.GreatAmericanInsurance import GreatAmericanInsurance
@@ -77,7 +80,6 @@ def scrape_USB():
         time.sleep(4)
         us_bank.filter_by_dev_location()
         list_div = us_bank.driver.find_elements(By.CLASS_NAME, 'css-1q2dra3')
-        # print(list_div)
         list_title = us_bank.filter_by(list_div)
         objects = us_bank.convert_title_to_db_objects(list_title)
         us_bank.make_usbank_object(objects)
@@ -94,6 +96,9 @@ def scrape_53():
         time.sleep(10)
         list_dev = fifth_third.driver.find_elements(By.XPATH, '//li[contains(@class, "css-1q2dra3")]')
         titles = fifth_third.filter_by(list_dev)
+        look_href = WebDriverWait(fifth_third.driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME,
+                                                                                              "css-19uc56f")))
+        strip_links_href(look_href)
         objects = fifth_third.convert_title_to_db_objects(titles)
         fifth_third.make_fifth_third_bank_object(objects)
         fifth_third.driver.quit()

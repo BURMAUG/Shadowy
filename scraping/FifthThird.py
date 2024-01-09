@@ -4,13 +4,17 @@ import time
 
 from dotenv import load_dotenv
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common import ElementClickInterceptedException, NoSuchElementException, WebDriverException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 from slack_sdk import WebClient
 
+
 import db
+from Config.Configure import strip_links_href
 
 load_dotenv()
 
@@ -18,7 +22,7 @@ slack_token = os.getenv('TOKEN')
 slack_channel_id = os.getenv('CHANNEL_ID')
 client = WebClient(token=slack_token)
 
-#this is a global configuration for the 53 class 
+
 def configure_53_chromedriver():
     options = Options()
     options.add_argument('--headless')
@@ -45,6 +49,7 @@ class FifthThird:
                 WebDriverException,
                 ElementClickInterceptedException):
             print("Unable to locate Fifth Third filter btn")
+
     def convert_title_to_db_objects(self, titles):
         title_list = []
         for title in range(len(titles)):
