@@ -3,11 +3,11 @@ from multiprocessing import Process
 
 from dotenv import load_dotenv
 from selenium.common import ElementClickInterceptedException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.support.wait import WebDriverWait
 
 import Config
-from Config.Configure import strip_links_href
+# from Config.Configure import strip_links_href
 from scraping.CincinnatiChildrens import CincinnatiChildrens
 from scraping.FifthThird import FifthThird
 from scraping.GreatAmericanInsurance import GreatAmericanInsurance
@@ -96,9 +96,9 @@ def scrape_53():
         time.sleep(10)
         list_dev = fifth_third.driver.find_elements(By.XPATH, '//li[contains(@class, "css-1q2dra3")]')
         titles = fifth_third.filter_by(list_dev)
-        look_href = WebDriverWait(fifth_third.driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME,
-                                                                                              "css-19uc56f")))
-        strip_links_href(look_href)
+        # look_href = WebDriverWait(fifth_third.driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME,
+        #                                                                                       "css-19uc56f")))
+        # strip_links_href(look_href)
         objects = fifth_third.convert_title_to_db_objects(titles)
         fifth_third.make_fifth_third_bank_object(objects)
         fifth_third.driver.quit()
@@ -106,16 +106,16 @@ def scrape_53():
         print("Something terrible happened with 53 BANK")
 
 
-def scrape_CCH():
-    global c, titles
-    try:
-        c = CincinnatiChildrens(os.getenv('CHILDRENS'))
-        jobs = c.filter_by_developers()
-        titles = Config.Configure.convert_to_str_cch(jobs=jobs)
-        Config.Configure.make_cch_object(job_titles=titles)
-        c.driver.quit()
-    except FileNotFoundError:
-        print('Something terribly happened with Cincinnati children\'s')
+# def scrape_CCH():
+#     global c, titles
+#     try:
+#         c = CincinnatiChildrens(os.getenv('CHILDRENS'))
+#         jobs = c.filter_by_developers()
+#         titles = Config.Configure.convert_to_str_cch(jobs=jobs)
+#         Config.Configure.make_cch_object(job_titles=titles)
+#         c.driver.quit()
+#     except FileNotFoundError:
+#         print('Something terribly happened with Cincinnati children\'s')
 
 
 def scrape_KRG():
@@ -136,7 +136,7 @@ if __name__ == '__main__':
         Process(target=scrape_UPS),
         Process(target=scrape_USB),
         Process(target=scrape_53),
-        Process(target=scrape_CCH),
+        # Process(target=scrape_CCH),
         Process(target=scrape_KRG),
     ]
     for process in processes:
