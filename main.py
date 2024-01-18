@@ -45,9 +45,14 @@ def scrape_GAIC():
         search_bar.send_keys('developer')
         search_btn.click()
         time.sleep(4)
-
+        # this should be the links gotten
+        link_list = gaic.driver.find_elements(By.CLASS_NAME, 'css-19uc56f')
+        for link in link_list:
+            if 'developer' in link.get_attribute('href'):
+                print(f'Link: {link.get_attribute("href")}')
         # filter by seniority then send me and email about the job and then add it into the database
         titles = gaic.driver.find_elements(By.CLASS_NAME, 'css-1q2dra3')
+
         job_description = gaic.filter_by(titles)
         # print(job_description)
         list = gaic.convert_title_to_db_objects(job_description)
@@ -131,6 +136,7 @@ def scrape_KRG():
 
 
 if __name__ == '__main__':
+    # scrape_GAIC()
     processes = [
         Process(target=scrape_GAIC),
         Process(target=scrape_UPS),
