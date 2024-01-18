@@ -80,7 +80,7 @@ class UPS:
 
     def make_ups_object(self, job_titles):
         for title in job_titles:
-            # print(title, end='\n')
+            print(title, end='\n')
             if len(title) == 6:
                 company_name = 'United Postal Services (UPS)'
                 position = title[0]
