@@ -54,7 +54,7 @@ def scrape_GAIC():
         titles = gaic.driver.find_elements(By.CLASS_NAME, 'css-1q2dra3')
 
         job_description = gaic.filter_by(titles)
-        # print(job_description)
+        # print( "GAIC ", job_description)
         list = gaic.convert_title_to_db_objects(job_description)
         gaic.make_gaic_object(list)
 
@@ -136,16 +136,15 @@ def scrape_KRG():
 
 
 if __name__ == '__main__':
-    # scrape_GAIC()
-    processes = [
-        Process(target=scrape_GAIC),
-        Process(target=scrape_UPS),
-        Process(target=scrape_USB),
-        Process(target=scrape_53),
-        # Process(target=scrape_CCH),
-        Process(target=scrape_KRG),
-    ]
-    for process in processes:
-        process.start()
-    for process in processes:
-        process.join()
+    while True:
+        processes = [
+            Process(target=scrape_GAIC),
+            Process(target=scrape_UPS),
+            Process(target=scrape_USB),
+            Process(target=scrape_53),
+            Process(target=scrape_KRG)
+        ]
+        for process in processes:
+            process.start()
+        for process in processes:
+            process.join()

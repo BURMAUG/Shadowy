@@ -67,6 +67,7 @@ class GreatAmericanInsurance:
                     title.text.lower().__contains__('manager')):
                 continue
             else:
+                # print(title.text)
                 title_list.append(title.text)  # I need to add this to a database
         return title_list
 
@@ -79,18 +80,21 @@ class GreatAmericanInsurance:
 
     def make_gaic_object(self, job_titles):
         for title in job_titles:
-            if len(title) == 6:
+            if len(title) >= 6:
                 company_name = 'Great American Insurance Company'
                 position = title[0]
                 if ('software' in position.lower() or
                         'developer' in position.lower() or
                         'application' in position.lower() or
                         'engineer' in position.lower()):
+                    # print(company_name, position, uploaded_days)
                     try:
                         if 'today' in title[-2].lower():
                             uploaded_days = 0
                         elif 'yesterday' in title[-2].lower():
                             uploaded_days = 1
+                        elif '3 days ago' in title[-2].lower():
+                            uploaded_days = 2
                         else:
                             uploaded_days = int(re.findall(r'\d+', title[-2])[0])
                         db.cursor.execute(
@@ -107,4 +111,5 @@ class GreatAmericanInsurance:
                     except (IndexError, ValueError) as e:
                         # Handle the exception (e.g., print an error message)
                         print(f"Error processing title: {title}. Error: {e}")
+                # print()
         db.connection.commit()
