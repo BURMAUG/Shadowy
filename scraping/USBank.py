@@ -92,7 +92,7 @@ class USBank:
 
     def make_usbank_object(self, job_titles):
         for title in job_titles:
-            if len(title) == 6:
+            if len(title) >= 6:
                 company_name = 'US BANK'
                 position = title[0]
                 if ('software' in position.lower() or
@@ -104,6 +104,8 @@ class USBank:
                             uploaded_days = 0
                         elif 'yesterday' in title[-2].lower():
                             uploaded_days = 1
+                        elif '3 days ago' in title[-2].lower():
+                            uploaded_days = 2
                         else:
                             uploaded_days = int(re.findall(r'\d+', title[-2])[0])
                         db.cursor.execute(

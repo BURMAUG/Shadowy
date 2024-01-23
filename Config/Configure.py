@@ -52,7 +52,7 @@ def filter_by(titles) -> [str]:
 
 def make_fifth_third_bank_object(job_titles, companyName):
     for title in job_titles:
-        if len(title) == 6:
+        if len(title) >= 6:
             company_name = companyName.upper()
             position = title[0]
             try:
@@ -60,6 +60,8 @@ def make_fifth_third_bank_object(job_titles, companyName):
                     uploaded_days = 0
                 elif 'yesterday' in title[-2].lower():
                     uploaded_days = 1
+                elif '3 days ago' in title[-2].lower():
+                    uploaded_days = 2
                 else:
                     uploaded_days = int(re.findall(r'\d+', title[-2])[0])
                 db.cursor.execute(
