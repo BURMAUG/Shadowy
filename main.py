@@ -6,9 +6,9 @@ from selenium.common import ElementClickInterceptedException
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.support.wait import WebDriverWait
 
-import Config
+# import Config
 # from Config.Configure import strip_links_href
-from scraping.CincinnatiChildrens import CincinnatiChildrens
+# from scraping.CincinnatiChildrens import CincinnatiChildrens
 from scraping.FifthThird import FifthThird
 from scraping.GreatAmericanInsurance import GreatAmericanInsurance
 from selenium.webdriver.common.by import By
@@ -136,15 +136,15 @@ def scrape_KRG():
 
 
 if __name__ == '__main__':
-    while True:
-        processes = [
-            Process(target=scrape_GAIC),
-            Process(target=scrape_UPS),
-            Process(target=scrape_USB),
-            Process(target=scrape_53),
-            Process(target=scrape_KRG)
-        ]
-        for process in processes:
-            process.start()
-        for process in processes:
-            process.join()
+    # while True:
+    processes = [
+        Process(target=scrape_GAIC),
+        Process(target=scrape_UPS),
+        Process(target=scrape_USB),
+        Process(target=scrape_53),
+        Process(target=scrape_KRG)
+    ]
+    for process in processes:
+        process.start()
+    for process in processes:
+        process.join()

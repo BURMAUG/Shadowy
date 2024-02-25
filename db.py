@@ -2,6 +2,7 @@ import sqlite3
 
 # ======================= DATABASE CONFIG ==============================================
 connection = sqlite3.connect('/Users/dj/Desktop/job_db.repository')
+# connection = sqlite3.connect('/app/db/job_db.repository')
 cursor = connection.cursor()
 
 cursor.execute(
