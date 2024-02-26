@@ -41,7 +41,7 @@ def scrape_GAIC():
 
         # search by sending the keyword developer
         search_bar = gaic.driver.find_element(By.CLASS_NAME, 'css-10mv5a0')  # this should be the search bar
-        search_btn = gaic.driver.find_element(By.CLASS_NAME, 'css-1g3xgst')
+        search_btn = gaic.driver.find_element(By.CLASS_NAME, 'css-95sf2f')
         search_bar.send_keys('developer')
         search_btn.click()
         time.sleep(4)

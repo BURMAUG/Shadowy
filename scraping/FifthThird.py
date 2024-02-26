@@ -42,7 +42,7 @@ class FifthThird:
             search_box = self.driver.find_element(By.CLASS_NAME, "css-c8umoa")
             search_box.send_keys("software engineer")
             time.sleep(10)
-            search_btn = self.driver.find_element(By.CLASS_NAME, "css-nsxtx1")
+            search_btn = self.driver.find_element(By.CLASS_NAME, "css-8e9uat")
             search_btn.click()
         except (ElementClickInterceptedException,
                 NoSuchElementException,
