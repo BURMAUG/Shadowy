@@ -37,7 +37,7 @@ class UPS:
     def filter_ups_by_dev_location(self):
         try:
             self.ups_driver.find_element(By.CLASS_NAME, 'css-c8umoa').send_keys('software engineer')
-            self.ups_driver.find_element(By.CLASS_NAME, 'css-18zt84s').click()
+            self.ups_driver.find_element(By.CLASS_NAME, 'css-12bdoy').click()
             self.ups_driver.find_element(By.CLASS_NAME, 'css-shvw01').click()
             time.sleep(7)
             location_btn = self.ups_driver.find_element(By.ID, 'location')  # click on location

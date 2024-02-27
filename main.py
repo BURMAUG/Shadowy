@@ -70,6 +70,10 @@ def scrape_UPS():
         ups.filter_ups_by_dev_location()
         list_devs = ups.ups_driver.find_elements(By.CLASS_NAME, 'css-1q2dra3')
         list_tit = ups.filter_by(list_devs)
+        links = ups.ups_driver.find_elements(By.CLASS_NAME, 'css-19uc56f')
+        for link in links:
+            if 'software' in link.get_attribute('href'):
+                print(f'Link: {link.get_attribute("href")}')
         op = ups.convert_title_to_db_objects(list_tit)
         ups.make_ups_object(op)
         time.sleep(3)
